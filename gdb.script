@@ -1,0 +1,7 @@
+add-auto-load-safe-path ./
+file ./vmlinux
+source vmlinux-gdb.py
+target remote localhost:1234
+set architecture aarch64
+layout regs
+b start_kernel
