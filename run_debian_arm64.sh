@@ -12,10 +12,14 @@ kernel_build=$PWD/rootfs_debian_arm64/usr/src/linux/
 rootfs_path=$PWD/rootfs_debian_arm64
 rootfs_image=$PWD/rootfs_debian_arm64.ext4
 
-rootfs_size=2048
+rootfs_size=51200
 SMP="-smp 4"
 
-QEMU=qemu-system-aarch64
+#VIRT=",virtualization=on,type=virt"
+VIRT=""
+
+#QEMU=qemu-system-aarch64
+QEMU=/home/rex/work/qemu/build/qemu-system-aarch64
 
 #CPU=cortex-a72
 CPU=neoverse-n1
@@ -143,7 +147,7 @@ build_rootfs(){
 }
 
 run_qemu_debian(){
-		cmd="$QEMU -m 1024 -cpu $CPU -M virt,gic-version=3,its=on,iommu=smmuv3\
+		cmd="$QEMU -m 1024 -cpu $CPU -M virt,gic-version=3,its=on,iommu=smmuv3$VIRT \
 			-nographic $SMP -kernel arch/arm64/boot/Image \
 			-append \"$kernel_arg $debug_arg $rootfs_arg $crash_arg $dyn_arg\"\
 			-drive if=none,file=$rootfs_image,id=hd0,format=raw\
