@@ -62,10 +62,10 @@ missing-syscalls: scripts/checksyscalls.sh $(offsets-file) FORCE
 # 5) Generate constants for Python GDB integration
 #
 
-extra-$(CONFIG_GDB_SCRIPTS) += build_constants_py
+#extra-$(CONFIG_GDB_SCRIPTS) += build_constants_py
 
-build_constants_py: $(timeconst-file) $(bounds-file)
-	@$(MAKE) $(build)=scripts/gdb/linux $@
+#build_constants_py: $(timeconst-file) $(bounds-file) FORCE
+#	@$(MAKE) $(build)=scripts/gdb/linux $@
 
 # Keep these three files during make clean
 no-clean-files := $(bounds-file) $(offsets-file) $(timeconst-file)

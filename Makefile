@@ -1517,6 +1517,15 @@ PHONY += $(DOC_TARGETS)
 $(DOC_TARGETS): scripts_basic FORCE
 	$(Q)$(MAKE) $(build)=Documentation $@
 
+PHONY += scripts_gdb
+scripts_gdb: prepare0
+	$(Q)$(MAKE) $(build)=scripts/gdb/linux build_constants_py
+	$(Q)ln -fsn $(abspath $(srctree)/scripts/gdb/vmlinux-gdb.py)
+
+
+ifdef CONFIG_GDB_SCRIPTS
+all: scripts_gdb
+endif
 else # KBUILD_EXTMOD
 
 ###
